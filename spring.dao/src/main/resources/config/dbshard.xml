@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns:mycat="http://org.opencloudb/">
+
+	<schema name="test" checkSQLschema="true" sqlMaxLimit="100">
+		<table name="t_test" dataNode="dn1,dn2,dn3" rule="mod-long" />
+	</schema>
+	
+	<!-- 一个schema反馈了，表的分区规则rule，以及部署的DB节点datanode -->
+	<schema name="cec_ly" checkSQLschema="true" sqlMaxLimit="100">
+		
+		<table name="CEC_TicketOrder" dataNode="cec_dn1,cec_dn2,cec_dn3" rule="sharding-by-prefixpattern" />
+		
+		<table name="CEC_Actor,CEC_Attachment,CEC_Attachment_New,CEC_BenefitCard,CEC_BenefitCardConsumeOrder,CEC_BenefitCardConsumeOrderPhase,CEC_BenefitCardConsumeSnackOrder,CEC_BenefitCardConsumeStat,CEC_BenefitCar
+dRechargeOrder,CEC_BenefitCardRechargeStat,CEC_BenefitCardSettle,CEC_BenefitCardStat,CEC_BenefitCardType,CEC_BenefitCardTypeLog,CEC_BenefitCardTypeRule,CEC_BenefitCardTypeRule_Hall,CEC_BenefitCardTypeSnackRule,CEC_BenefitCar
+dTypeSnackRule_Snack,CEC_BenefitCardType_Channel,CEC_BenefitCardUser,CEC_BnLog,CEC_Channel,CEC_ChannelPolicy,CEC_ChannelPolicyLog,CEC_ChannelRule,CEC_ChannelRuleGroup,CEC_ChannelRule_Hall,CEC_ChannelSettings,CEC_ChannelShow,
+CEC_ChannelTicketOrderDaily,CEC_Cinema,CEC_CinemaChannelTicketOrderDaily,CEC_CinemaPolicy,CEC_CinemaPolicyLog,CEC_CinemaRule,CEC_CinemaRule_Hall,CEC_CinemaTicketOrderDaily,CEC_CircuitSettings,CEC_CityGroup,CEC_Film,CEC_FilmE
+rrorLog,CEC_FilmSyncLog,CEC_Hall,CEC_HallType,CEC_MemberAccessType,CEC_MemberSettings,CEC_MinPriceGroup,CEC_NoticeUser,CEC_OrderSendRecord,CEC_Organ,CEC_Role,CEC_Seat,CEC_Show,CEC_ShowErrorLog,CEC_ShowSyncLog,CEC_ShowUpdateL
+og,CEC_Snack,CEC_SnackChannel,CEC_SnackGroup,CEC_SnackNumber,CEC_SnackOrder,CEC_SnackOrderItem,CEC_SnackOrderPhase,CEC_SnackOrder_now,CEC_SnackType,CEC_SnackVoucher,CEC_SpecialChannel,CEC_SpecialPolicy,CEC_SpecialPolicyLog,C
+EC_SpecialPolicy_Channel,CEC_SpecialPolicy_Film,CEC_SpecialPolicy_Hall,CEC_SpecialRule,CEC_SpecialRule_Film,CEC_SpecialRule_Hall,CEC_TaskSchedule,CEC_TicketAccessType,CEC_TicketOrderItem,CEC_TicketOrderItemPhase,CEC_TicketOr
+derPhase,CEC_TicketOrderStat,CEC_TicketOrder_0,CEC_TicketOrder_1,CEC_TicketOrder_2,CEC_TicketOrder_3,CEC_TicketSettings,CEC_TicketVoucher,CEC_TicketVoucherPhase,CEC_User,CEC_UserSettings,stat_ticket_order_item,zz_modify" dat
+aNode="cec_dn1" />
+	</schema>
+
+	<dataNode name="dn1" dataHost="localhost1" database="test" />
+	<dataNode name="dn2" dataHost="localhost1" database="test2" />
+	<dataNode name="dn3" dataHost="localhost1" database="test3" />
+	
+	<!-- 一个dataNode反映，一个主备机和一个DB实例database -->
+	<dataNode name="cec_dn1" dataHost="localhost1" database="cec_ly_1" />
+	<dataNode name="cec_dn2" dataHost="localhost1" database="cec_ly_2" />
+	<dataNode name="cec_dn3" dataHost="localhost1" database="cec_ly_3" />
+	
+	<!-- 一个dataHost反应，一个主备机的配置信息 -->
+	<dataHost name="localhost1" maxCon="1000" minCon="10" balance="0"
+		writeType="0" dbType="mysql" dbDriver="native" switchType="1"  slaveThreshold="100">
+		<heartbeat>select user()</heartbeat>
+		<!-- can have multi write hosts -->
+		<writeHost host="hostM1" url="172.16.34.12:3306" user="cec"
+			password="cec">
+			<!-- can have multi read hosts -->
+		</writeHost>
+		<writeHost host="hostS1" url="172.16.34.27:3306" user="cec"
+			password="cec" />
+	</dataHost>
+</schema>
