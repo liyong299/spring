@@ -1,0 +1,21 @@
+spring aop的实现Spring提供了两种方式来生成代理对象: JDKProxy和Cglib、AspectJ
+
+具体使用哪种方式生成由AopProxyFactory根据AdvisedSupport对象的配置来决定
+
+默认的策略是如果目标类是接口，则使用JDK动态代理技术，否则使用Cglib来生成代理
+
+spring使用的JDK动态代理方法，可以参考：com.ly.test.spring.aop.java动态代理2.MyProxy
+
+com.ly.test.spring.aop.java动态代理1.Test中有类似模拟
+
+
+cglib 和 AspectJ 区别
+AspectJ是一个面向切面的框架，它扩展了Java语言。AspectJ定义了AOP语法所以它有一个专门的编译器用来生成遵守Java字节编码规范的Class文件。
+cglib 是通过对字节码，是一个强大的，高性能，高质量的Code生成类库，它可以在运行期扩展Java类与实现Java接口。Hibernate用它来实现PO(Persistent Object 持久化对象)字节码的动态生成。
+
+
+
+
+
+
+

@@ -73,7 +73,7 @@ public class Spring加载配置
 			ac.setConfigLocations(new String[]{"app-context.xml"});
 			ac.refresh();
 			
-			SayHello sayHello = (SayHello) ac.getBean("sayHello");
+			私有方法的调用 sayHello = (私有方法的调用) ac.getBean("sayHello");
 			System.out.println(sayHello.toString());
 		}
 		catch (Exception ex)
@@ -99,7 +99,7 @@ public class Spring加载配置
 		{
 			cr = new ClassPathResource("app-context.xml");
 			BeanFactory bf = new XmlBeanFactory(cr); // 已经过期
-			SayHello sayHello = (SayHello) bf.getBean("sayHello");
+			私有方法的调用 sayHello = (私有方法的调用) bf.getBean("sayHello");
 			System.out.println(sayHello.toString());
 		}
 		catch (Exception ex)
@@ -120,12 +120,12 @@ public class Spring加载配置
 		try
 		{
 			ac = new FileSystemXmlApplicationContext("D:/Work/Workspace/scec_dis/spring/src/main/resources/app-context.xml");
-			SayHello sayHello = (SayHello) ac.getBean("sayHello");
+			私有方法的调用 sayHello = (私有方法的调用) ac.getBean("sayHello");
 			System.out.println(sayHello.toString());
 			
 			String[] path = {"D:/Work/Workspace/scec_dis/spring/src/main/resources/app-context.xml"};
 			ac = new FileSystemXmlApplicationContext(path);
-			SayHello sayHello2 = (SayHello) ac.getBean("sayHello");
+			私有方法的调用 sayHello2 = (私有方法的调用) ac.getBean("sayHello");
 			System.out.println(sayHello2.toString());
 		}
 		catch (Exception ex)
@@ -146,7 +146,7 @@ public class Spring加载配置
 		try
 		{
 			ac = new ClassPathXmlApplicationContext("app-context.xml");
-			SayHello sayHello = (SayHello) ac.getBean("sayHello");
+			私有方法的调用 sayHello = (私有方法的调用) ac.getBean("sayHello");
 			System.out.println(sayHello.toString());
 		}
 		catch (Exception ex)

@@ -22,6 +22,8 @@ public class Test
 		String filePath = "D:\\Work\\Workspace\\scec_dis\\spring\\src\\main\\resources\\anno.properties";
 		prop.load(new FileInputStream(new File(filePath)));
 		
+		
+		
 		AnnotationManager annot = new AnnotationManager(prop);
 		UserAction userAction = (UserAction) annot.getBean("userAction");
 		userAction.life();

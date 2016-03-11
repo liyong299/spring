@@ -1,0 +1,8 @@
+本包用来模拟sun的JVM加载器功能
+
+sun本身的加载器sun.misc.Launcher$AppClassLoader不能直接用来加载文件，需要自己实现ClassLoader接口来做。
+
+但是可以利用sun的AppClassLoader类加载classes目录下的文件。（将需要的文件拷贝到classes对应目录下即可）
+
+
+
