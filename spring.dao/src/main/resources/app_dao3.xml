@@ -23,6 +23,8 @@
 
 	<!-- 引入属性文件 -->
 	<context:property-placeholder location="classpath:config/db_dao.properties" />
+	
+	
 
 	<bean id="dataSourceOne" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
