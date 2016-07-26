@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class LogAOP {  
     
-    @Pointcut("execution(* com.ly.test.spring.aopdemo.SwimService.*(..))")
+    @Pointcut("execution(* com.mopon.rmp.client.action.SwimService.*(..))")
     public void recordLog(){}
     
     @Pointcut("execution(* com.ly.test.spring.aopdemo.CakeService.*(..))")
