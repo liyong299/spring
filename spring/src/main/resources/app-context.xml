@@ -13,7 +13,8 @@
 	default-lazy-init="true" default-merge="true">
 
 	<context:annotation-config />
-	<context:component-scan base-package="com.ly.test.spring.aopdemo"></context:component-scan>
+	<!-- <context:component-scan base-package="com.ly.test.spring.aopdemo"></context:component-scan> -->
+	<context:component-scan base-package="com.ly.test.spring.exception"></context:component-scan>
 <!-- 	<bean id="logAOP" class="com.ly.test.spring.aopdemo.LogAOP" /> -->
 
 	<!-- xml中的aop(aspect)配置方法. 此时不用配置aop:aspectj-autoproxy -->
@@ -28,4 +29,6 @@
     <!-- 代码中的aop(aspect)注解配置方法. 此时需要配置aop:aspectj-autoproxy -->
     <aop:aspectj-autoproxy />
 
+<!-- 异常拦截的后置配置方法，使用注解时，注释掉当前引用 -->
+    <import resource="spring-exception-context.xml"/>
 </beans>
