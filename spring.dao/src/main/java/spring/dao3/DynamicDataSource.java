@@ -1,6 +1,6 @@
 package spring.dao3;
 
-import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;  
+import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 /**
  * 简化配置，通过动态DS，使得配置
