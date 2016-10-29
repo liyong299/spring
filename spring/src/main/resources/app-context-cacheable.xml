@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+	 xmlns:cache="http://www.springframework.org/schema/cache" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+	http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-4.2.xsd"
+	default-lazy-init="true" default-merge="true">
+
+	<context:annotation-config />
+	<context:component-scan base-package="com.ly.test.spring.cacheable"></context:component-scan>
+
+     <!-- redis 相关配置 -->    
+     <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">    
+         <property name="maxIdle" value="300" />
+         <property name="maxWaitMillis" value="300" />    
+         <property name="testOnBorrow" value="true" />    
+     </bean>    
+  
+     <bean id="JedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"    
+       p:host-name="172.16.34.48" p:port="6379" p:database="4" p:pool-config-ref="poolConfig"/>    
+    
+     <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">    
+         <property name="connectionFactory" ref="JedisConnectionFactory" />    
+     </bean>    
+      
+     <!-- spring自己的缓存管理器，这里定义了缓存位置名称 ，即注解中的value -->    
+     <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">    
+         <property name="caches">    
+            <set>    
+                <!-- 这里可以配置多个redis -->  
+                <bean class="com.ly.test.spring.cacheable.RedisCache">    
+                     <property name="redisTemplate" ref="redisTemplate" />    
+                     <property name="name" value="redis1"/>
+                </bean>  
+                <bean class="com.ly.test.spring.cacheable.RedisCache">    
+                     <property name="redisTemplate" ref="redisTemplate" />    
+                     <property name="name" value="common"/>    
+                     <!-- common名称要在类或方法的注解中使用 -->  
+                </bean>  
+            </set>    
+         </property>    
+     </bean>    
+       
+    <!-- 启用缓存注解功能，这个是必须的，否则注解不会生效，另外，该注解一定要声明在spring主配置文件中才会生效 -->    
+    <cache:annotation-driven cache-manager="cacheManager" />    
+</beans>
