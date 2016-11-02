@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class LogAOP {  
     
-    @Pointcut("execution(* com.mopon.rmp.client.action.SwimService.*(..))")
+	@Pointcut("execution(* com.ly.test.spring.aopdemo.SwimService.*(..))")
     public void recordLog(){}
     
     @Pointcut("execution(* com.ly.test.spring.aopdemo.CakeService.*(..))")
@@ -32,30 +32,30 @@ public class LogAOP {
   
     @Around("recordLog()")
     public void around(ProceedingJoinPoint point) throws Throwable {
-	System.out.println("已经记录下操作日志@Around 方法执行前");
-        System.out.println("@AfterReturning：模拟日志记录功能...");
-        System.out.println("@AfterReturning：目标方法为：" + 
+		System.out.println("已经记录下操作日志@Around 方法执行前");
+		System.out.println("@AfterReturning：模拟日志记录功能...");
+		System.out.println("@AfterReturning：目标方法为：" +
                 point.getSignature().getDeclaringTypeName() + 
                 "." + point.getSignature().getName());
-        System.out.println("@AfterReturning：参数为：" + 
+		System.out.println("@AfterReturning：参数为：" +
                 Arrays.toString(point.getArgs()));
-        System.out.println("@AfterReturning：被织入的目标对象为：" + point.getTarget());
+		System.out.println("@AfterReturning：被织入的目标对象为：" + point.getTarget());
         long startTime = System.nanoTime();  
         
         point.proceed();
         
         long endTime = System.nanoTime();  
-        System.out.println("执行时间为： [" + (endTime - startTime) / 1000000 + "]毫秒");  
+		System.out.println("执行时间为： [" + (endTime - startTime) / 1000000 + "]毫秒");
     }
     
     @Around("recordLog2()")
     public void around2(ProceedingJoinPoint point) throws Throwable {
-	System.out.println("已经记录下操作日志@Around 方法执行前");
-        System.out.println("@AfterReturning：模拟日志记录功能...");
-        System.out.println("@AfterReturning：目标方法为：" + 
+		System.out.println("已经记录下操作日志@Around 方法执行前");
+		System.out.println("@AfterReturning：模拟日志记录功能...");
+		System.out.println("@AfterReturning：目标方法为：" +
                 point.getSignature().getDeclaringTypeName() + 
                 "." + point.getSignature().getName());
-        System.out.println("@AfterReturning：参数为：" + 
+		System.out.println("@AfterReturning：参数为：" +
                 Arrays.toString(point.getArgs()));
         String targetMethodName = point.getSignature().getName();
         if ("test".equals(targetMethodName))
@@ -64,12 +64,12 @@ public class LogAOP {
             System.out.println("----------------------------" + paramVal);
         }
         
-        System.out.println("@AfterReturning：被织入的目标对象为：" + point.getTarget());
+		System.out.println("@AfterReturning：被织入的目标对象为：" + point.getTarget());
         long startTime = System.nanoTime();  
         
         point.proceed();
         
         long endTime = System.nanoTime();  
-        System.out.println("执行时间为： [" + (endTime - startTime) / 1000000 + "]毫秒");  
+		System.out.println("执行时间为： [" + (endTime - startTime) / 1000000 + "]毫秒");
     }
 }  
