@@ -41,8 +41,6 @@ public class Test
 		// 
 		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 		Class clsData = classLoader.loadClass("com.ly.test.spring.aop.aopÄ£Äâ.Test");
-		Test test = (Test) clsData.newInstance();
-		test.print();
 	}
 
 }
